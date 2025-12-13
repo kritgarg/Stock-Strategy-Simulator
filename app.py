@@ -114,3 +114,8 @@ if run_button:
     if data.empty:
         st.error("❌ Invalid ticker or no data.")
         st.stop()
+
+    # INDICATORS
+    data['SMA_SHORT'] = data['Close'].rolling(sma_short).mean()
+    data['SMA_LONG'] = data['Close'].rolling(sma_long).mean()
+    data['RSI'] = calculate_rsi(data['Close'], rsi_period)
