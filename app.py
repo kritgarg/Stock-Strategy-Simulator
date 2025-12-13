@@ -119,3 +119,16 @@ if run_button:
     data['SMA_SHORT'] = data['Close'].rolling(sma_short).mean()
     data['SMA_LONG'] = data['Close'].rolling(sma_long).mean()
     data['RSI'] = calculate_rsi(data['Close'], rsi_period)
+
+    # SIGNALS
+    data['Signal'] = 0
+    data.loc[
+        (data['SMA_SHORT'] > data['SMA_LONG']) & (data['RSI'] < 40),
+        'Signal'
+    ] = 1
+    data.loc[
+        (data['SMA_SHORT'] < data['SMA_LONG']) | (data['RSI'] > 70),
+        'Signal'
+    ] = -1
+
+    data = data.dropna().copy()
