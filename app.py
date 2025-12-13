@@ -236,3 +236,20 @@ if run_button:
     col1.metric("💰 Final Capital", f"₹{final_value:,.0f}")
     col2.metric("📈 Strategy Return", f"{strategy_return:.2f}%")
     col3.metric("📊 Buy & Hold Return", f"{buy_hold_return:.2f}%")
+
+    # CHART
+    st.subheader("📉 Price Chart with Signals")
+    fig, ax = plt.subplots(figsize=(14, 6))
+    ax.plot(data.index, data['Close'], label="Price")
+    ax.plot(data.index, data['SMA_SHORT'], "--", label="Short Trend")
+    ax.plot(data.index, data['SMA_LONG'], "--", label="Long Trend")
+
+    buys = [t for t in trade_log if t["Type"] == "BUY"]
+    exits = [t for t in trade_log if t["Type"] != "BUY"]
+
+    ax.scatter([t["Date"] for t in buys], [t["Price"] for t in buys], marker="^", s=120, label="BUY")
+    ax.scatter([t["Date"] for t in exits], [t["Price"] for t in exits], marker="v", s=120, label="EXIT")
+
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
