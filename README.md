@@ -39,9 +39,9 @@ A beautifully designed, interactive web application that:
 
 | Strategy Inputs | Result Visualization |
 |:---:|:---:|
-| ![Strategy Inputs](docs/images/inputs_placeholder.png) | ![Results Chart](docs/images/chart_placeholder.png) |
+| ![Strategy Inputs](./screenshots/input.png) | ![Results Chart](./screenshots/output.png) |
 
-*(Note: Replace `docs/images/` paths with actual screenshots after deployment)*
+
 
 ## ⚙️ Environment Variables
 
@@ -107,7 +107,7 @@ Stock-Strategy-Simulator/
 
 **Krit Garg**
 -   [GitHub](https://github.com/kritgarg)
--   [LinkedIn](https://linkedin.com/in/kritgarg)
+-   [LinkedIn](https://linkedin.com/in/krit--garg)
 
 ---
 
