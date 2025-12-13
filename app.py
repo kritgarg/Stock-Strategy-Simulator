@@ -132,3 +132,57 @@ if run_button:
     ] = -1
 
     data = data.dropna().copy()
+
+    # BACKTESTING
+    capital = float(initial_capital)
+    shares = 0
+    buy_price = 0
+    trade_log = []
+
+    for i in range(len(data)):
+        price = float(data['Close'].iloc[i])
+        signal = int(data['Signal'].iloc[i])
+        date = data.index[i]
+
+        if signal == 1 and shares == 0:
+            trade_capital = capital * (position_size / 100)
+            shares = trade_capital // price
+            if shares > 0:
+                capital -= shares * price
+                buy_price = price
+                trade_log.append({
+                    "Type": "BUY",
+                    "Date": date,
+                    "Price": price,
+                    "Shares": shares
+                })
+
+        if shares > 0 and price <= buy_price * (1 - stop_loss_pct / 100):
+            capital += shares * price
+            trade_log.append({
+                "Type": "STOP LOSS",
+                "Date": date,
+                "Price": price,
+                "Shares": shares
+            })
+            shares = 0
+
+        elif shares > 0 and price >= buy_price * (1 + take_profit_pct / 100):
+            capital += shares * price
+            trade_log.append({
+                "Type": "TAKE PROFIT",
+                "Date": date,
+                "Price": price,
+                "Shares": shares
+            })
+            shares = 0
+
+        elif signal == -1 and shares > 0:
+            capital += shares * price
+            trade_log.append({
+                "Type": "SELL",
+                "Date": date,
+                "Price": price,
+                "Shares": shares
+            })
+            shares = 0
