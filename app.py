@@ -32,3 +32,65 @@ stop_loss_pct = st.sidebar.slider("Stop Loss (%)", 2, 30, 10)
 take_profit_pct = st.sidebar.slider("Take Profit (%)", 5, 50, 20)
 
 run_button = st.sidebar.button("Run Strategy")
+
+
+
+if not run_button:
+    st.markdown("## What do these inputs actually mean?")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("### Short-Term SMA (Simple Moving Average)")
+        st.caption(
+            "This is the **average stock price of the last few days**.\n\n"
+            "• Smaller value (like 20 days) reacts quickly to price changes\n"
+            "• Used to detect **recent trend direction**"
+        )
+
+        st.markdown("###  Long-Term SMA (Simple Moving Average)")
+        st.caption(
+            "This is the **average stock price over many days**.\n\n"
+            "• Larger value (like 200 days) changes slowly\n"
+            "• Used to understand the **overall market direction**"
+        )
+
+        st.markdown("### How SMA works in this app")
+        st.caption(
+            "• When **Short SMA goes above Long SMA → trend is upward (BUY allowed)**\n"
+            "• When **Short SMA goes below Long SMA → trend weakens (SELL)**"
+        )
+
+    with col2:
+        st.markdown("### RSI (Relative Strength Index)")
+        st.caption(
+            "RSI measures **how fast the price is moving**.\n\n"
+            "• RSI < 40 → price is relatively low → safer to buy\n"
+            "• RSI > 70 → price is very high → risky to buy"
+        )
+
+        st.markdown("### Capital per Trade (%)")
+        st.caption(
+            "Controls **how much of your money is used in one trade**.\n\n"
+            "• 20% = safer (money spread over time)\n"
+            "• 100% = very risky (all money at once)"
+        )
+
+        st.markdown("### Stop Loss (%)")
+        st.caption(
+            "Limits how much you can lose in a single trade.\n\n"
+            "• Example: 10% stop loss → trade exits if price falls 10%\n"
+            "• Protects your capital from big crashes"
+        )
+
+        st.markdown("### Take Profit (%)")
+        st.caption(
+            "Locks profit automatically.\n\n"
+            "• Example: 20% take profit → sell after 20% gain\n"
+            "• Prevents giving back profits"
+        )
+
+    st.success(
+        "👉 After you click **Run Strategy**, this explanation disappears and "
+        "you will only see results, charts, and trade history."
+    )
