@@ -104,3 +104,13 @@ def calculate_rsi(close, period):
     avg_loss = loss.rolling(period).mean()
     rs = avg_gain / avg_loss
     return 100 - (100 / (1 + rs))
+
+# ----------main logic -------------
+if run_button:
+    st.subheader(f"📊 Results for {ticker}")
+
+    data = yf.download(ticker, start=start_date, end=end_date)
+
+    if data.empty:
+        st.error("❌ Invalid ticker or no data.")
+        st.stop()
