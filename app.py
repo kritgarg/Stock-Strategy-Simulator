@@ -230,3 +230,9 @@ if run_button:
         """,
         unsafe_allow_html=True
     )
+
+    # METRICS
+    col1, col2, col3 = st.columns(3)
+    col1.metric("💰 Final Capital", f"₹{final_value:,.0f}")
+    col2.metric("📈 Strategy Return", f"{strategy_return:.2f}%")
+    col3.metric("📊 Buy & Hold Return", f"{buy_hold_return:.2f}%")
