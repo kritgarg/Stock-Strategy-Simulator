@@ -186,3 +186,47 @@ if run_button:
                 "Shares": shares
             })
             shares = 0
+
+    # FINAL VALUES
+    first_price = float(data['Close'].iloc[0])
+    last_price = float(data['Close'].iloc[-1])
+
+    final_value = capital + shares * last_price
+    # OVERALL PROFIT / LOSS LABEL
+    # PROFIT / LOSS AMOUNT
+    profit_loss_amount = final_value - initial_capital
+
+    if profit_loss_amount > 0:
+        pl_text = f" You made a profit of ₹{profit_loss_amount:,.0f}"
+        pl_color = "#2ecc71"
+    else:
+            pl_text = f"You lost ₹{abs(profit_loss_amount):,.0f}"
+            pl_color = "#e74c3c"
+
+
+    buy_hold_shares = initial_capital // first_price
+    buy_hold_final = buy_hold_shares * last_price
+
+    strategy_return = ((final_value - initial_capital) / initial_capital) * 100
+    buy_hold_return = ((buy_hold_final - initial_capital) / initial_capital) * 100
+
+    st.markdown(
+        f"""
+        <br>
+        <div style="
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
+            background-color: {pl_color};
+            margin-bottom: 15px;
+        ">
+            {pl_text}
+        </div>
+        <br>
+        <br>
+        """,
+        unsafe_allow_html=True
+    )
