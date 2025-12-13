@@ -253,3 +253,7 @@ if run_button:
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)
+
+    # TRADE LOG
+    st.subheader("📋 Trade Log")
+    st.dataframe(pd.DataFrame(trade_log))
