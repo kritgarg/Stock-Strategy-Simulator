@@ -36,63 +36,48 @@ run_button = st.sidebar.button("Run Strategy")
 
 
 if not run_button:
-    st.markdown("## What do these inputs actually mean?")
+    st.markdown("## Strategy Parameter Guide")
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("### Short-Term SMA (Simple Moving Average)")
+        st.markdown("### Short-Term SMA (Fast Moving Average)")
         st.caption(
-            "This is the **average stock price of the last few days**.\n\n"
-            "• Smaller value (like 20 days) reacts quickly to price changes\n"
-            "• Used to detect **recent trend direction**"
+            "The average price over a shorter period (e.g., 50 days). "
+            "Reacts faster to recent price changes. "
+            "Used to identify short-term trends."
         )
 
-        st.markdown("###  Long-Term SMA (Simple Moving Average)")
+        st.markdown("### Long-Term SMA (Slow Moving Average)")
         st.caption(
-            "This is the **average stock price over many days**.\n\n"
-            "• Larger value (like 200 days) changes slowly\n"
-            "• Used to understand the **overall market direction**"
+            "The average price over a longer period (e.g., 200 days). "
+            "Reacts slower to price changes. "
+            "Used to identify the broader market trend."
         )
 
-        st.markdown("### How SMA works in this app")
+        st.markdown("### How the Strategy Works")
         st.caption(
-            "• When **Short SMA goes above Long SMA → trend is upward (BUY allowed)**\n"
-            "• When **Short SMA goes below Long SMA → trend weakens (SELL)**"
+            "• **BUY Signal**: When Short SMA crosses *above* Long SMA (Golden Cross).\n"
+            "• **SELL Signal**: When Short SMA crosses *below* Long SMA (Death Cross)."
         )
 
     with col2:
         st.markdown("### RSI (Relative Strength Index)")
         st.caption(
-            "RSI measures **how fast the price is moving**.\n\n"
-            "• RSI < 40 → price is relatively low → safer to buy\n"
-            "• RSI > 70 → price is very high → risky to buy"
+            "A momentum indicator that measures the magnitude of recent price changes.\n"
+            "• **RSI < 40**: Oversold (Potential Buy opportunity)\n"
+            "• **RSI > 70**: Overbought (Potential Sell opportunity)"
         )
 
-        st.markdown("### Capital per Trade (%)")
+        st.markdown("### Risk Management Settings")
         st.caption(
-            "Controls **how much of your money is used in one trade**.\n\n"
-            "• 20% = safer (money spread over time)\n"
-            "• 100% = very risky (all money at once)"
+            "• **Capital per Trade**: % of total capital allocated to a single trade.\n"
+            "• **Stop Loss**: Automatic sell trigger if price drops by X%.\n"
+            "• **Take Profit**: Automatic sell trigger if price rises by X%."
         )
 
-        st.markdown("### Stop Loss (%)")
-        st.caption(
-            "Limits how much you can lose in a single trade.\n\n"
-            "• Example: 10% stop loss → trade exits if price falls 10%\n"
-            "• Protects your capital from big crashes"
-        )
-
-        st.markdown("### Take Profit (%)")
-        st.caption(
-            "Locks profit automatically.\n\n"
-            "• Example: 20% take profit → sell after 20% gain\n"
-            "• Prevents giving back profits"
-        )
-
-    st.success(
-        "👉 After you click **Run Strategy**, this explanation disappears and "
-        "you will only see results, charts, and trade history."
+    st.info(
+        "👉 Adjust the inputs in the sidebar, then click **Run Strategy** to see the simulation results."
     )
 
 
